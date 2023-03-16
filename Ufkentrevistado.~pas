@@ -1,0 +1,56 @@
+unit Ufkentrevistado;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, FMTBcd, StdCtrls, Buttons, DB, SqlExpr, Provider, DBClient,
+  Grids, DBGrids, ExtCtrls;
+
+type
+  TFrmfkentrev = class(TForm)
+    Panel1: TPanel;
+    DBGrid1: TDBGrid;
+    DataSetProvider1: TDataSetProvider;
+    DataSource1: TDataSource;
+    SQLQuery1: TSQLQuery;
+    ClientDataSet1: TClientDataSet;
+    ClientDataSet1CODIGO_ENTREVISTADO: TIntegerField;
+    ClientDataSet1NOME_COMPLETO: TStringField;
+    EdtPesquisa: TEdit;
+    BtnPesquisa: TBitBtn;
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure BtnPesquisaClick(Sender: TObject);
+    procedure EdtPesquisaChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frmfkentrev: TFrmfkentrev;
+
+implementation
+      uses UEntrevista, Upesqentrev;
+{$R *.dfm}
+
+procedure TFrmfkentrev.DBGrid1DblClick(Sender: TObject);
+begin
+  FrmEntrevista.EdtEntrevistadoCod.Text := DbGrid1.SelectedField.DataSet.FieldByName('CODIGO_ENTREVISTADO').AsString;
+  FrmEntrevista.EdtEntrevistadoname.Text := DBGrid1.SelectedField.DataSet.FieldByName('NOME_COMPLETO').AsString;
+  Frmfkentrev.hide;
+end;
+
+procedure TFrmfkentrev.BtnPesquisaClick(Sender: TObject);
+begin
+  ClientDataSet1.Filter := 'upper(NOME_COMPLETO) Like'+#39+uppercase(edtpesquisa.text)+'%'+#39;
+  ClientDataSet1.Filtered := true;
+end;
+
+procedure TFrmfkentrev.EdtPesquisaChange(Sender: TObject);
+begin
+ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+end;
+
+end.

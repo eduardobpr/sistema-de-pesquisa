@@ -1,0 +1,73 @@
+unit UBackup;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, StdCtrls;
+
+type
+  TFrmBackup = class(TForm)
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Edit3: TEdit;
+    BtnGerar: TBitBtn;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    OpenDialog1: TOpenDialog;
+    BtnSair: TBitBtn;
+    procedure BtnGerarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmBackup: TFrmBackup;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmBackup.BtnGerarClick(Sender: TObject);
+var
+origem,destino: String;
+begin
+  origem := Edit1.Text;
+  destino := Edit2.Text + Edit3.Text;
+  ShowMessage('Backup Efetuado com Sucesso!');
+  if not CopyFile(PChar(Origem), PChar(Destino), true) then
+  ShowMessage('Erro ao copiar ' + Origem + ' para ' + Destino);
+end;
+
+procedure TFrmBackup.SpeedButton1Click(Sender: TObject);
+begin
+ if OpenDialog1.Execute then
+ Edit1.Text := OpenDialog1.FileName;
+end;
+
+procedure TFrmBackup.SpeedButton2Click(Sender: TObject);
+begin
+  if OpenDialog1.Execute then
+  Edit2.Text := OpenDialog1.FileName;
+end;
+
+procedure TFrmBackup.BtnSairClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TFrmBackup.BitBtn1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.
